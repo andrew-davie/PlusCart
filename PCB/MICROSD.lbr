@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE eagle SYSTEM "eagle.dtd">
+<eagle version="9.6.2">
+<drawing>
+<settings>
+<setting alwaysvectorfont="no"/>
+<setting verticaltext="up"/>
+</settings>
+<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<layers>
+<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="2" name="Route2" color="16" fill="1" visible="no" active="yes"/>
+<layer number="3" name="Route3" color="17" fill="1" visible="no" active="yes"/>
+<layer number="4" name="Route4" color="18" fill="1" visible="no" active="yes"/>
+<layer number="5" name="Route5" color="19" fill="1" visible="no" active="yes"/>
+<layer number="6" name="Route6" color="25" fill="1" visible="no" active="yes"/>
+<layer number="7" name="Route7" color="26" fill="1" visible="no" active="yes"/>
+<layer number="8" name="Route8" color="27" fill="1" visible="no" active="yes"/>
+<layer number="9" name="Route9" color="28" fill="1" visible="no" active="yes"/>
+<layer number="10" name="Route10" color="29" fill="1" visible="no" active="yes"/>
+<layer number="11" name="Route11" color="30" fill="1" visible="no" active="yes"/>
+<layer number="12" name="Route12" color="20" fill="1" visible="no" active="yes"/>
+<layer number="13" name="Route13" color="21" fill="1" visible="no" active="yes"/>
+<layer number="14" name="Route14" color="22" fill="1" visible="no" active="yes"/>
+<layer number="15" name="Route15" color="23" fill="1" visible="no" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
+<layer number="31" name="tCream" color="7" fill="4" visible="no" active="yes"/>
+<layer number="32" name="bCream" color="7" fill="5" visible="no" active="yes"/>
+<layer number="33" name="tFinish" color="6" fill="3" visible="no" active="yes"/>
+<layer number="34" name="bFinish" color="6" fill="6" visible="no" active="yes"/>
+<layer number="35" name="tGlue" color="7" fill="4" visible="no" active="yes"/>
+<layer number="36" name="bGlue" color="7" fill="5" visible="no" active="yes"/>
+<layer number="37" name="tTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="38" name="bTest" color="7" fill="1" visible="no" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
+<layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
+<layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
+<layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
+<layer number="47" name="Measures" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="51" name="tDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="52" name="bDocu" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="88" name="SimResults" color="9" fill="1" visible="yes" active="yes"/>
+<layer number="89" name="SimProbes" color="9" fill="1" visible="yes" active="yes"/>
+<layer number="90" name="Modules" color="5" fill="1" visible="yes" active="yes"/>
+<layer number="91" name="Nets" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="92" name="Busses" color="1" fill="1" visible="yes" active="yes"/>
+<layer number="93" name="Pins" color="2" fill="1" visible="yes" active="yes"/>
+<layer number="94" name="Symbols" color="4" fill="1" visible="yes" active="yes"/>
+<layer number="95" name="Names" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
+</layers>
+<library>
+<packages>
+<package name="MICROSD_FOOTPRINT">
+<pad name="3V3" x="-13.97" y="6.35" drill="0.7" diameter="1.4224"/>
+<pad name="CS" x="-13.97" y="3.81" drill="0.7" diameter="1.4224"/>
+<pad name="MOSI" x="-13.97" y="1.27" drill="0.7" diameter="1.4224"/>
+<pad name="CLK" x="-13.97" y="-1.27" drill="0.7" diameter="1.4224"/>
+<pad name="MISO" x="-13.97" y="-3.81" drill="0.7" diameter="1.4224"/>
+<pad name="GND" x="-13.97" y="-6.35" drill="0.7" diameter="1.9304" shape="square"/>
+<wire x1="-16.51" y1="8.89" x2="-16.51" y2="-8.89" width="0.2" layer="47"/>
+<wire x1="-16.51" y1="-8.89" x2="1.27" y2="-8.89" width="0.2" layer="47"/>
+<wire x1="1.27" y1="-8.89" x2="1.27" y2="8.89" width="0.2" layer="47"/>
+<wire x1="1.27" y1="8.89" x2="-16.51" y2="8.89" width="0.2" layer="47"/>
+<wire x1="-7.366" y1="5.715" x2="-7.366" y2="-5.715" width="0.2" layer="47"/>
+<wire x1="-7.366" y1="-5.715" x2="3.81" y2="-5.715" width="0.2" layer="47"/>
+<wire x1="3.81" y1="-5.715" x2="3.81" y2="-2.54" width="0.2" layer="47"/>
+<wire x1="3.81" y1="5.715" x2="-7.366" y2="5.715" width="0.2" layer="47"/>
+<wire x1="3.81" y1="-2.54" x2="2.54" y2="-1.27" width="0.127" layer="47" curve="-90"/>
+<wire x1="3.81" y1="2.54" x2="2.54" y2="1.27" width="0.127" layer="47" curve="90"/>
+<wire x1="2.54" y1="1.27" x2="2.54" y2="-1.27" width="0.127" layer="47"/>
+<wire x1="3.81" y1="5.715" x2="3.81" y2="2.54" width="0.2" layer="47"/>
+</package>
+</packages>
+<symbols>
+<symbol name="MICROSD">
+<description>MICROSD for PlusCart</description>
+<wire x1="-33.02" y1="15.24" x2="-33.02" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="-33.02" y1="-2.54" x2="-15.24" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="-15.24" y1="-2.54" x2="-15.24" y2="15.24" width="0.254" layer="94"/>
+<wire x1="-15.24" y1="15.24" x2="-33.02" y2="15.24" width="0.254" layer="94"/>
+<pin name="3V3" x="-33.02" y="12.7" length="middle" rot="R180"/>
+<pin name="CS" x="-33.02" y="10.16" length="middle" rot="R180"/>
+<pin name="MOSI" x="-33.02" y="7.62" length="middle" rot="R180"/>
+<pin name="CLK" x="-33.02" y="5.08" length="middle" rot="R180"/>
+<pin name="MISO" x="-33.02" y="2.54" length="middle" rot="R180"/>
+<pin name="GND" x="-33.02" y="0" length="middle" rot="R180"/>
+<text x="-33.02" y="17.78" size="1.27" layer="95">&gt;name</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="MICROSD">
+<description>MICROSD for PlusCart</description>
+<gates>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MICROSD2">
+<gates>
+<gate name="G$1" symbol="MICROSD" x="20.32" y="2.54"/>
+</gates>
+<devices>
+<device name="MICROSD2" package="MICROSD_FOOTPRINT">
+<connects>
+<connect gate="G$1" pin="3V3" pad="3V3"/>
+<connect gate="G$1" pin="CLK" pad="CLK"/>
+<connect gate="G$1" pin="CS" pad="CS"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="MISO" pad="MISO"/>
+<connect gate="G$1" pin="MOSI" pad="MOSI"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+</drawing>
+</eagle>
