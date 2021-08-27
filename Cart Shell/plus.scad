@@ -16,7 +16,7 @@
 // Choose the type of shell
 SHELL_TYPE = 1; //[0:UnoCart,1:PlusCart]
 // Which part to render
-part = 8; // [0:FRONT,1:BACK,4:LOGO,5:LABEL,6:LETTERS,8:PINS:9:STICKER,10:PADS]
+part = 0; // [0:FRONT,1:BACK,4:LOGO,5:LABEL,6:LETTERS,8:PINS:9:STICKER,10:PADS]
 
 
 
@@ -55,18 +55,18 @@ LABEL_TEXT = "PLUSCART"; //8
 
 
 // Side-wall thickness.
-WALL = 2.4;
+WALL = 3.2;
 
 // Front/back wall thickness
 WALLZ = 2;
 ADJUST_BOARD_Y = -1.5;
 
 
-BOXX = 81.5;
+BOXX = 82;
 BOXY = 98.4;
 BOXZ = 18.275;
 
-LIP_WIDTH = 1.0;
+LIP_WIDTH = 1.6;
 LIP_HEIGHT = 1.6;
 LIP_TOL = 0.3;
 
@@ -244,12 +244,12 @@ module top(){
                 }
             }
             
-
-            translate([-BOXX/2+WALL,-BOXY/2,WALLZ])
+    // tensioners
+/*            translate([-BOXX/2+WALL,-BOXY/2,WALLZ])
                 cube([1.2,14,BOXZ/2+2-WALLZ]);
             translate([BOXX/2-WALL-1.2,-BOXY/2,WALLZ])
                 cube([1.2,14,BOXZ/2+2-WALLZ]);
-
+*/
 
         }
 
@@ -262,9 +262,9 @@ module top(){
 
         for (x =[-1,1]) {
         translate([x*(BOXX/2-WALL+LIP_WIDTH/2-0.6/2),
-            -BOXY/2+14+LIP_TOL+((BOXY-17.5-LIP_TOL*2)/2),
+            -BOXY/2+14+LIP_TOL+((BOXY-17.5-5-LIP_TOL*2)/2),
             BOXZ/2+WALLZ-LIP_HEIGHT/2-0.4])
-                cube([LIP_WIDTH+0.6,(BOXY-17.5),LIP_HEIGHT+1],center=true);
+                cube([LIP_WIDTH+0.6,(BOXY-17.5+5),LIP_HEIGHT+1],center=true);
     }
 
 
@@ -332,8 +332,8 @@ module letters(){
 
 module labelSlot(){
 
-    translate([-(BOXX-WALL*2)/2,BOXY/2-1.6+0.2,WALLZ/2])
-        cube([BOXX-WALL*2,0.6,BOXZ]);
+    translate([-(BOXX-WALL*2)/2,BOXY/2-1.6+0.2-0.2,WALLZ/2])
+        cube([BOXX-WALL*2,0.8,BOXZ]);
 
     translate([-(BOXX-WALL*2)/2+WALL/2,BOXY/2-1.4,WALLZ])
         cube([BOXX-WALL*2-WALL,1.4,BOXZ]);
@@ -523,9 +523,9 @@ module ledWindow() {
 module maskingLip() {
     for (x =[-1,1]) {
         translate([x*(BOXX/2-WALL+LIP_WIDTH/2),
-            -BOXY/2+14+LIP_TOL+((BOXY-17.5-LIP_TOL*2)/2),
+            -BOXY/2+14+LIP_TOL+((BOXY-17.5-5-LIP_TOL*2)/2),
             BOXZ/2+WALLZ-2+LIP_HEIGHT/2])
-                cube([LIP_WIDTH,(BOXY-17.5-LIP_TOL*2),LIP_HEIGHT],center=true);
+                cube([LIP_WIDTH,(BOXY-17.5+5-LIP_TOL*2),LIP_HEIGHT],center=true);
 
 /*        // masking lip
         for (x =[-1,1]) {
@@ -558,10 +558,10 @@ module basicShell() {
 }
 
 module tensioners() {
-    translate([-BOXX/2+WALL,-BOXY/2,WALLZ])
-        cube([1.2,14,BOXZ/2-WALLZ]);
-    translate([BOXX/2-WALL-1.2,-BOXY/2,WALLZ])
-        cube([1.2,14,BOXZ/2-WALLZ]);
+//    translate([-BOXX/2+WALL,-BOXY/2,WALLZ])
+//        cube([1.2,14,BOXZ/2-WALLZ]);
+//    translate([BOXX/2-WALL-1.2,-BOXY/2,WALLZ])
+//        cube([1.2,14,BOXZ/2-WALLZ]);
 }    
 
 module sdCardSlot() {
@@ -583,7 +583,7 @@ module middleAndBottomPins() {
 
     //middle
     for (x=[-1,1])
-        translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 1.5+2-0.375+ADJUST_BOARD_Y, WALLZ]) {
+        translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 1.5+2-0.375+ADJUST_BOARD_Y-1.6, WALLZ]) {
             rotate([0,0,90])
             pinholder(BOXZ/2-WALLZ);
     }
@@ -602,7 +602,7 @@ module pinMounts(){
     if (JOINING_PINS) {
         if (SHELL_TYPE  != UNOCART) {
             for (x=[-1,1])
-                translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 42.1, WALLZ]) {
+                translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 42.1-0.8, WALLZ]) {
                     rotate([0,0,90])
                     pinholder(BOXZ/2-WALLZ);            
             }
@@ -621,7 +621,7 @@ module pinMountsTop() {
     
         if (SHELL_TYPE == PLUSCART) {
             for (x=[-1,1])
-            translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 42.1, WALLZ])
+            translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 42.1-0.8, WALLZ])
                 rotate([0,0,90])
                     pinholder(BOXZ/2+2-WALLZ-PRONG_THICK-0.4);            
         }
@@ -634,7 +634,7 @@ module pinMountsTop() {
 
         // middle
         for (x=[-1,1])
-            translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 1.5+2-0.375+ADJUST_BOARD_Y, WALLZ]) {
+            translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 1.5+2-0.375+ADJUST_BOARD_Y-1.6, WALLZ]) {
                 rotate([0,0,90])
                 pinholder(BOXZ/2+2-WALLZ-PRONG_THICK-0.4);            
         }
@@ -666,7 +666,7 @@ module pads(){
 
 module frontShell(){
 
-    
+        
     translate([0,0,-0.008])
     difference(){
         union(){
@@ -679,7 +679,7 @@ module frontShell(){
         
             rightAngle(BOXZ/2-1-ROUNDBOXRADIUS/2, true);
             maskingLip();
-            tensioners();
+            //tensioners();
         }
 
         if (SHELL_TYPE == PLUSCART && MICROSD_SLOT)
@@ -693,12 +693,12 @@ module frontShell(){
         }
 
         if (FRONT_LOGO) {
-            for (z=[-0.1,0,0.2])
-            translate([0,0,WALLZ+0.41+z])
-                    rotate([0,180,0]) {
-                        logo2(-0.4,-1, 0.4);
-                        logo2(0);
-                    }
+            //for (z=[-0.1,0,0.2])
+            translate([-0,-0,-0.4])
+                    //rotate([0,180,0]) {
+                        //logo2(-0.4,-1, 0.4);
+                        logo2(0,0,0.4);
+                    //}
             
         }
             
@@ -713,6 +713,7 @@ module frontShell(){
                     rotate([0,0,-15])
                         cube([4,12,BOXZ/2]);
     }
+
 
 
 //    if (SHELL_TYPE == UNOCART) {
@@ -730,6 +731,8 @@ module frontShell(){
 
 if (part == _XMODE_FRONT){
     frontShell();
+    
+    
 }
 
 //if (part == MODE_FRONTANDLOGO){
@@ -800,11 +803,14 @@ if (part == MODE_LOGO){
     
     
     
-        translate([0,0,-0.4])
-            logo2(-0.95-0.2,0,0.4);
-        logo2(0,-2, 0.4);
+        //translate([0,0,-0.4])
+        //    logo2(-0.95-0.2,0,0.4);
+        //logo2(0,-2, 0.4);
         //logo2(0,-1, 0.4);
-        logo2(0.95-0.1);
+
+    
+      translate([0,0,-0.4])
+        logo2(1.3 /*0.95-0.1*/,0,0.4);
 }
 
 
