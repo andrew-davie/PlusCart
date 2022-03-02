@@ -9,14 +9,12 @@
 // shifted middle pinholder mounts down
 // adjusted trench depth
 
-
+VERSION_STRING = "21.09.20";
 
 
 
 // Choose the type of shell
 SHELL_TYPE = 1; //[0:UnoCart,1:PlusCart]
-// Which part to render
-part = 0; // [0:FRONT,1:BACK,4:LOGO,5:LABEL,6:LETTERS,8:PINS:9:STICKER,10:PADS]
 
 
 
@@ -49,6 +47,9 @@ MODE_PINS = 8;
 MODE_STICKER = 9;
 MODE_PADS = 10;
 
+// Which part to render
+part = _XMODE_FRONT; // [0:FRONT,1:BACK,4:LOGO,5:LABEL,6:LETTERS,8:PINS:9:STICKER,10:PADS]
+
 
 // Word on the label. Should be 8 letters maximum
 LABEL_TEXT = "PLUSCART"; //8
@@ -75,7 +76,8 @@ ANGY = 1.6;
 ANGY2 = 2.8;
 ANGX2 = 5;
 
-ROUNDBOXRADIUS = 1.5;
+ROUNDBOXRADIUS = 1.25; //1.75;
+PIN_SLOT_LENGTH = 15;
 
 
 LATCH_UP = 3;
@@ -224,6 +226,12 @@ module top(){
                 difference(){
                     roundedcube(size=[BOXX,BOXY,BOXZ],center=true,radius=ROUNDBOXRADIUS);
 
+                    for (x=[-1,1])
+                        for (z=[-1,1])
+                            translate([x*BOXX/2,0,z*((BOXZ+11)/2)])
+                            rotate([0,45,0])
+                                cube([10,BOXY+10,10],center=true);
+
                     if (SHELL_TYPE != UNOCART) {
                         translate([0,-0.4-0.4-0.3,0])
                             roundedcube(size=[BOXX-2*WALL,BOXY-2*WALL,BOXZ-2*WALLZ],center=true);
@@ -314,13 +322,13 @@ module letters(){
 
     color("green")
         translate([0,BOXY/2-1.4,0]) {
-            translate([BOXX-54.9+1,0,4.5])
+            translate([BOXX-54.9+1-3,0,4.5-0.5])
                 rotate([-90,180,0])
-                    scale([1,1,1])
+                    scale([1.1,1,1])
                         linear_extrude(0.4)
                                 text(LABEL_TEXT,font="HammerFat",size=10);
         }
-    color("green")
+/*    color("green")
         translate([0,BOXY/2-1.4,0]) {
             translate([BOXX-54.9-59.5,0,-2+4.5])
                 rotate([-90,270-45,0])
@@ -328,6 +336,7 @@ module letters(){
                         linear_extrude(0.4)
                                 text("SD",font="HammerFat",size=8);
         }
+*/
 }
 
 module labelSlot(){
@@ -583,7 +592,7 @@ module middleAndBottomPins() {
 
     //middle
     for (x=[-1,1])
-        translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 1.5+2-0.375+ADJUST_BOARD_Y-1.6, WALLZ]) {
+        translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 1.5+2-0.375+ADJUST_BOARD_Y, WALLZ]) {
             rotate([0,0,90])
             pinholder(BOXZ/2-WALLZ);
     }
@@ -634,7 +643,7 @@ module pinMountsTop() {
 
         // middle
         for (x=[-1,1])
-            translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 1.5+2-0.375+ADJUST_BOARD_Y-1.6, WALLZ]) {
+            translate([x*(BOXX/2-WALL-PINHOLDER_WALL-0.15), 1.5+2-0.375+ADJUST_BOARD_Y, WALLZ]) {
                 rotate([0,0,90])
                 pinholder(BOXZ/2+2-WALLZ-PRONG_THICK-0.4);            
         }
@@ -657,7 +666,7 @@ module pads(){
                 translate([x*BOXX/2,BOXY*y/2,0])
                     cylinder(r=10,h=0.2);
 
-        scale([1.005,1.005,1])
+        scale([1.01,1.01,1])
             frontShell();
     }
     
@@ -670,12 +679,22 @@ module frontShell(){
     translate([0,0,-0.008])
     difference(){
         union(){
-            translate([0,0,BOXZ/2])
+            translate([0,0,BOXZ/2]) {
+                
                 difference(){
                     roundedcube(size=[BOXX,BOXY,BOXZ],center=true,radius=ROUNDBOXRADIUS);
+                    
+                    for (x=[-1,1])
+                        for (z=[-1,1])
+                            translate([x*BOXX/2,0,z*((BOXZ+11)/2)])
+                            rotate([0,45,0])
+                                cube([10,BOXY+10,10],center=true);
+                    
+                    
                     basicShell();
                     ledWindow();
                 }
+            }
         
             rightAngle(BOXZ/2-1-ROUNDBOXRADIUS/2, true);
             maskingLip();
@@ -701,6 +720,11 @@ module frontShell(){
                     //}
             
         }
+
+    translate([0,-45,WALLZ-0.4+0.1])
+        linear_extrude(0.6)
+            rotate([0,180,0])
+            text(VERSION_STRING,font="Lucida Console:style=bold",halign="center",size=10);
             
         // Trim tensioner area...
         translate([-BOXX/2+WALL/2,-BOXY/2,WALLZ])
@@ -726,10 +750,13 @@ module frontShell(){
                         logo2(1);
                     }
  */           
+
+
 }
 
 
 if (part == _XMODE_FRONT){
+    pads();
     frontShell();
     
     
@@ -751,8 +778,10 @@ module latch(rd,ht,rot, tol=0){
     
 }
 
-if (part == MODE_BACK)
+if (part == MODE_BACK) {
+    pads();
     top();
+}
 
 if (part ==MODE_ALL){
 
@@ -816,34 +845,53 @@ if (part == MODE_LOGO){
 
 PIN_OFFSET_X = (PIN_EDGE_TO_EDGE+PIN_WIDTH)/2;
 
+module mainProng(flange, flange2, length) {
+        // the main extending prong...
+    translate([0,-length/2,0])
+        scale([1,length/PRONG_THICK])
+            square(PRONG_THICK,center=true);
+
+    // The tip of the prong
+    hull() {
+        square(PRONG_THICK,center=true);
+        translate([0,PRONG_THICK,0])
+            circle(r=PRONG_THICK/4);
+        }
+        
+
+    // The insert tabs
+    hull(){
+        translate([-flange+PIN_THICK/2,-length,0])
+            circle(r=PIN_THICK/2);
+        translate([flange2-PIN_THICK/2,-length,0])
+            circle(r=PIN_THICK/2);
+    }
+        
+}
+
 module pin(flange=5, flange2=5, length=PIN_LENGTH) {
 
     rotate([0,90,0])
         translate([0,-length,-PIN_WIDTH/2])
             rotate([0,0,180]) {
-    
+       
+                linear_extrude(0.2)
+                    difference() {
+                        offset(r=4)
+                            mainProng(flange, flange2, length);
+                        offset(r=0.43)
+                            mainProng(flange, flange2, length);
+                    }
+                
                 difference() {
+                    
+                    
+                    
+                    
                     linear_extrude(PIN_WIDTH) {
 
-                        // the main extending prong...
-                        translate([0,-length/2,0])
-                            scale([1,length/PRONG_THICK])
-                                square(PRONG_THICK,center=true);
+                        mainProng(flange, flange2, length);
                         
-                        // The tip of the prong
-                        hull() {
-                            square(PRONG_THICK,center=true);
-                            translate([0,PRONG_THICK,0])
-                                circle(r=PRONG_THICK/4);
-                            }
-
-                        // The insert tabs
-                        hull(){
-                                translate([-flange+PIN_THICK/2,-length,0])
-                                    circle(r=PIN_THICK/2);
-                                translate([flange2-PIN_THICK/2,-length,0])
-                                    circle(r=PIN_THICK/2);
-                        }
                     }
     
 /*                    translate([-4.85,-length-PIN_THICK/2+0.4,1])
@@ -901,17 +949,19 @@ if (part == MODE_PADS) {
 
 if (part == MODE_PINS) {
     
+    rotate([0,180,0]) {
+    
     for (x=[0,1])
-        translate([-x*10,x*5,0])
+        translate([35-x*18,-13,0])
             rotate([0,90,0]) {
                 translate([0,0,0])
-                    pin(6,6, 16);
+                    pin(6,6, PIN_SLOT_LENGTH);
 //                scale([0.9,0.99,0.95])
 //                    pin(6,6, 16);
             }
     
     for (x=[-1,0,1,2])
-            translate([20+x*8,0,0])
+            translate([20+x*12,0,0])
                 rotate([0,90,90]) {
                 translate([0,0,0])
                     pin(BOXZ/2-WALLZ-0.4,BOXZ/2-WALLZ-0.4, 1);
@@ -919,6 +969,7 @@ if (part == MODE_PINS) {
 
 //                    pin(BOXZ/2-WALLZ-0.4,BOXZ/2-WALLZ-0.4, 1);
                 }    
+    }
 }
 
 
