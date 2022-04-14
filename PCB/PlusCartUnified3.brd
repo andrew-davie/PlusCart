@@ -54,7 +54,7 @@
 <layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
@@ -5352,6 +5352,17 @@
 <wire x1="82.53710625" y1="47.02070625" x2="82.526365625" y2="44.4093" width="0.2" layer="46"/>
 <wire x1="82.526365625" y1="44.4093" x2="77.4524625" y2="44.4089875" width="0.2" layer="46"/>
 <wire x1="77.4524625" y1="44.4089875" x2="77.463203125" y2="47.02039375" width="0.2" layer="46"/>
+<polygon width="0.1524" layer="20">
+<vertex x="77.308221875" y="46.984996875"/>
+<vertex x="82.784278125" y="46.984996875"/>
+<vertex x="82.784278125" y="44.52075"/>
+<vertex x="82.784278125" y="44.4523"/>
+<vertex x="77.29453125" y="44.4523"/>
+<vertex x="77.253459375" y="44.4523"/>
+<vertex x="77.253459375" y="46.971309375"/>
+<vertex x="77.280840625" y="46.971309375"/>
+<vertex x="77.280840625" y="46.95761875"/>
+</polygon>
 </plain>
 <libraries>
 <library name="con-edge">
@@ -6722,6 +6733,12 @@ Please make sure your boards conform to these design rules.</description>
 <mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
 <mfgpreviewcolor name="substratecolor" color="0xFF786E46"/>
 </mfgpreviewcolors>
+<errors>
+<approved hash="4,1,043c041cba22ba02"/>
+<approved hash="4,1,24242403fe3dfe1a"/>
+<approved hash="4,16,043c041cba22ba02"/>
+<approved hash="4,16,24242403fe3dfe1a"/>
+</errors>
 </board>
 </drawing>
 <compatibility>

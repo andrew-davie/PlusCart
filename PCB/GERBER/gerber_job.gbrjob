@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2021-07-21T16:12:49Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.6.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.5723,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "PlusCartUnified3"
+        },
+        "Owner": "Andrew Davie <andrew@taswegian.com>",
+        "Size": {
+            "X": 84.8868,
+            "Y": 57.777
+        }
+    }
+}
